@@ -1,10 +1,13 @@
+from datetime import date
 from tracker import SleepTracker
-st=SleepTracker("Vincent",15,0,8,0,0)
-print(st.analyze_sleep())
-
-
-
-
+#name age date hours quality dream
+name=input("What's your name? ")
+age=input("How old are you? ")
+hours=input("How long have you slept?(in hours) ")
+quality=input("How did you sleep sleep (Good, Bad or Mediocre) ")
+dream=input("Did you have a dream (Yes or No) ")
+st=SleepTracker(name,age,date.today(),hours,quality,dream)
+st.data_store()
 
 
 

@@ -1,12 +1,6 @@
 import matplotlib
 import openpyxl as pyxl
-# wb=pyxl.load_workbook("data.xlsx")
-# sheet=wb.active
-# for i in range(1,11):
-#     index="A"+str(i)
-#     sheet[index]="hello"
-#     print(sheet[index].value)
-# wb.save("data.xlsx")
+
 
 class SleepTracker:
     def __init__(self,user,age,date,hours,quality,dream):
@@ -45,3 +39,20 @@ class SleepTracker:
                 return "not enough"
             if self.hours>8:
                 return "too much"
+    def data_store(self):
+        wb=pyxl.load_workbook("data.xlsx")
+        sheet=wb.active
+        i=1
+        while True:
+            if sheet["A"+str(i)].value==None:
+                sheet["A"+str(i)]=self.date
+                sheet["B"+str(i)]=self.user
+                sheet["C"+str(i)]=self.age
+                sheet["D"+str(i)]=self.hours
+                sheet["E"+str(i)]=self.quality
+                sheet["F"+str(i)]=self.dream
+                wb.save("data.xlsx")
+                break
+            else:
+                i+=1
+            

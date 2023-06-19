@@ -22,14 +22,21 @@ import openpyxl as pyxl
 # at.data_store()
 wb=pyxl.load_workbook("data.xlsx")
 sheet=wb.active
-print(sheet.max_row)
 sl=[]
 dt=[]
 for i in range(1,sheet.max_row+1):
     sl.append(sheet["D"+str(i)].value)
     dt.append(i)
-plt.plot(dt,sl)
-plt.title("sleep hours")
+plt.plot(dt,sl,label="sleep hours")
+
+sl=[]
+dt=[]
+for i in range(1,sheet.max_row+1):
+    sl.append(sheet["G"+str(i)].value)
+    dt.append(i)
+plt.plot(dt,sl,label="activity hours")
+plt.title("activity hours and sleep hours")
+plt.legend()
 plt.show()    
 
 # import matplotlib

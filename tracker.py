@@ -3,13 +3,14 @@ import openpyxl as pyxl
 
 
 class SleepTracker:
-    def __init__(self,user,age,date,hours,quality,dream):
+    def __init__(self,user,age,date,hours,quality,dream,weather):
         self.user=user
         self.age=age
         self.date=date
         self.hours=hours
         self.quality=quality
         self.dream=dream
+        self.weather=weather
     def analyze_sleep(self):
         if self.age<5 and self.age>=3:
             if self.hours<=11 and self.hours>=10:
@@ -51,6 +52,7 @@ class SleepTracker:
                 sheet["D"+str(i)]=self.hours
                 sheet["E"+str(i)]=self.quality
                 sheet["F"+str(i)]=self.dream
+                sheet["K"+str(i)]=self.weather
                 wb.save("data.xlsx")
                 break
             else:

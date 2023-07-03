@@ -59,14 +59,26 @@ root.geometry("600x500")
 def analyze():
     st=SleepTracker(entry1.get(),int(entry2.get()),date.today(),entry3.get(),entry4.get(),entry5.get(),get_weat())
     st.data_store()
+    at=activity_tracker(entry6.get(),entry7.get(),entry8.get())
+    at.analyze_activity()
+    at.data_store()
     wb=pyxl.load_workbook("data.xlsx")
     sheet=wb.active
     sl=[]
     dt=[]
     for i in range(1,sheet.max_row+1):
-        sl.append(sheet["D"+str(i)].value)
+        sl.append(float(sheet["D"+str(i)].value))
         dt.append(i)
     plt.plot(dt,sl,label="sleep hours")
+    plt.title("sleep and activity hours")
+    
+    dt1=[]
+    sl1=[]
+    for i in range(1,sheet.max_row+1):
+        sl1.append(float(sheet["G"+str(i)].value))
+        dt1.append(i)
+    plt.plot(dt1,sl1,label="activity hours")
+    plt.legend()
     plt.show()
 
 frame=customtkinter.CTkFrame(master=root)
@@ -80,7 +92,7 @@ entry2.pack(pady=12,padx=10)
 entry3=customtkinter.CTkEntry(master=frame,placeholder_text="How long have you slept?(in hours)",width=300,justify=CENTER)
 entry3.pack(pady=12,padx=10)
 
-entry4=customtkinter.CTkEntry(master=frame,placeholder_text="How did you sleep sleep? (Good, Bad or Mediocre)",width=400,justify=CENTER)
+entry4=customtkinter.CTkEntry(master=frame,placeholder_text="How did you sleep? (Good, Bad or Mediocre)",width=400,justify=CENTER)
 entry4.pack(pady=12,padx=10)
 
 entry5=customtkinter.CTkEntry(master=frame,placeholder_text="Did you have a dream? (Yes or No)",width=300,justify=CENTER)
